@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 function getText(data, i, j, grid, columns, rows) {
@@ -18,10 +18,15 @@ function getText(data, i, j, grid, columns, rows) {
   return adjacentMines
 }
 
-const Cell = ({ grid, i, j, columns, rows }) => {
+const Cell = ({ grid, i, j, columns, rows, onMine, gameOver }) => {
   const [isVisible, setIsVisible] = useState(false)
   const data = grid[i][j] || {}
   const text = getText(data, i, j, grid, columns, rows)
+  useEffect(() => {
+    if (gameOver) {
+      setIsVisible(true)
+    }
+  }, [gameOver])
   return (
     <StyledWrapper
       {...data}
@@ -29,7 +34,7 @@ const Cell = ({ grid, i, j, columns, rows }) => {
       tabIndex={1}
       onClick={() => {
         if (data.isMine) {
-          // game over
+          onMine()
         }
         setIsVisible(true)
       }}
@@ -44,8 +49,8 @@ const StyledWrapper = styled.div`
   height: 40px;
   display: grid;
   place-items: center;
-  border: 1px solid black;
-  background: ${(props) => (props.isVisible ? 'white' : 'lightgray')};
+  border: 2px solid white;
+  background: ${(props) => (props.isVisible ? 'white' : '#e0e0e0')};
 `
 
 export default Cell

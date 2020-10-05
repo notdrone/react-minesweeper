@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Game from './game'
 import styled, { css } from 'styled-components'
 import Button from './components/button'
+import { cardCss, StyledTitle } from './styles'
 
 function App() {
   const [m, setM] = useState('10')
@@ -46,14 +47,8 @@ function App() {
       </StyledSetup>
     )
   }
-  return <Game rows={Number(m)} columns={Number(n)} mines={Number(x)} />
+  return <Game rows={Number(m)} columns={Number(n)} mines={Number(x)} onStartAgain={() => setStart(false)} />
 }
-
-const cardCss = css`
-  border: 1px solid #e0e0e0;
-  padding: 12px;
-  border-radius: 8px;
-`
 
 const StyledSetup = styled.div`
   display: grid;
@@ -75,10 +70,6 @@ const StyledGridInputWrapper = styled.div`
   grid-template-columns: 1fr auto 1fr;
   grid-gap: 12px;
   align-items: center;
-`
-
-const StyledTitle = styled.h1`
-  text-align: center;
 `
 
 const StyledMinesWrapper = styled.div`
