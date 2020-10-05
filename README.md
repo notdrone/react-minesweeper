@@ -1,4 +1,4 @@
-Demo: notdrone/react-minesweepe
+Demo: https://minesweeper.notdr.one
 
 ## Available Scripts
 
